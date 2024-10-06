@@ -17,3 +17,8 @@ body {
 h1 {
     text-align: center;
 }
+
+#delayChart {
+    max-width: 100%;
+    height: 400px; /* Aggiungi altezza per il canvas */
+}
