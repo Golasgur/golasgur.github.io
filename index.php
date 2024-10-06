@@ -18,28 +18,29 @@
         // Funzione per caricare il CSV e generare il grafico
         //hhhhhh
         function loadCSV() {
-            Papa.parse('data.csv', {
-                download: true,
-                header: true,
-                complete: function(results) {
-                    const delayData = {};
-                    const headers = results.meta.fields.slice(1); // Ignora la colonna Data
+    Papa.parse('data.csv', {
+        download: true,
+        header: true,
+        complete: function(results) {
+            console.log(results); // Aggiungi questa riga
+            const delayData = {};
+            const headers = results.meta.fields.slice(1);
 
-                    // Calcola il totale dei ritardi per ogni persona
-                    results.data.forEach(row => {
-                        headers.forEach(header => {
-                            if (!delayData[header]) {
-                                delayData[header] = 0;
-                            }
-                            delayData[header] += row[header] ? parseInt(row[header]) : 0;
-                        });
-                    });
-
-                    // Genera il grafico
-                    createChart(delayData);
-                }
+            results.data.forEach(row => {
+                headers.forEach(header => {
+                    if (!delayData[header]) {
+                        delayData[header] = 0;
+                    }
+                    delayData[header] += row[header] ? parseInt(row[header]) : 0;
+                });
             });
+
+            console.log(delayData); // Aggiungi questa riga
+            createChart(delayData);
         }
+    });
+}
+
 
         // Funzione per creare il grafico
         function createChart(data) {
